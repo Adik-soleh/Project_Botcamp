@@ -1,26 +1,11 @@
 
-section{
-    background-color: rgb(249, 244, 244);
-    width: 100%;
-    height: auto;
-    margin: 20px auto;
-}
-
-.container{
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-    display: block;
-}
 section h1{
     text-align: center;
     padding-bottom: 20px;
 }
 .container{
     display: flex;
-    
-}
-.container img{
-    max-width: 400px;
+    flex-direction: row;
 }
 .container ul li{
     list-style-type: none;
@@ -34,16 +19,16 @@ section h1{
 .container .tech {
    margin-top: 20px;
 }
-.container .tech ul img {
+.container .tech ul  {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr); 
     gap: 10px;
 }
 
-
-
-
+.container .img img{
+    max-width: 500px;
+}
 
 @media only screen and (max-width: 920px) {
     .container{

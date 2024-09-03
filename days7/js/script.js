@@ -83,11 +83,11 @@ function Cards(){
 detail.addEventListener('click', function(){
     const details = document.querySelectorAll('#details');
 details[0].innerHTML =`
-<section>
+    <section>
         <h1>${FakeI[i].NameProject}</h1>
         <div class="container">
             <div class="img">
-               <img src="${FakeI[i].files}" alt="" class="img-pp">
+                <img src="${FakeI[i].files}" alt="">
             </div>
             <div class="date">
                 <div class="duration">
@@ -100,9 +100,9 @@ details[0].innerHTML =`
                 <div class="tech">
                     <h3>Technologies</h3>
                     <ul>
-                        <li>${FakeI[i].CheckBox1 ? '<img src="image/icons8-javascript-48.png" alt="JavaScript">' : ''}</li>
-                        <li>${FakeI[i].CheckBox2 ? '<img src="image/ava-48.png" alt="Java">' : ''}</li>
-                        <li>${FakeI[i].CheckBox3 ? '<img src="image/golang-48.png" alt="Golang">' : ''}</li>
+                        <li> ${FakeI[i].CheckBox1 ? '<img src="image/icons8-javascript-48.png" alt="JavaScript">' : ''}</li>
+                        <li> ${FakeI[i].CheckBox2 ? '<img src="image/ava-48.png" alt="Java">' : ''}</li>
+                        <li> ${FakeI[i].CheckBox3 ? '<img src="image/golang-48.png" alt="Golang">' : ''}</li>
                         <li>${FakeI[i].CheckBox4 ? '<img src="image/python-48.png" alt="Python">' : ''}</li>
                     </ul>
                 </div>
@@ -170,7 +170,7 @@ function time(){
     var s = d.getSeconds();
     var m = d.getMinutes();
     var h = d.getHours();
-   return `${d} jam`
+   return `${h} jam`
 }
 
 

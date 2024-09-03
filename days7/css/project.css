@@ -49,7 +49,7 @@ form{
     margin-bottom: 30px;
 }
 .form-project .form-data ul {
-    display: flow-root;
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr); 
     list-style-type: none;
