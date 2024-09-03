@@ -29,7 +29,7 @@ function sendData(event){
 // download resume
 const link = document.querySelector('.download');
 link.addEventListener('click', function(){
-    link.download = 'image/HTML.png';
+    link.download = 'image/me.jpg';
 });
 
 
