@@ -3,7 +3,8 @@
     padding: 0px;
 }
 section{
-    padding-top: 40px;
+    padding-top: 4px;
+    margin: 20px auto
 }
 .container{
     box-shadow: 1px 0px 15px;    
@@ -131,13 +132,16 @@ section{
     .container{
         width: 100%;
         height: auto;
+
     }
     .content{
-    width: 100%;
+    width: fit-content;
     height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 40px;
+    margin: 20px auto;
 }
 .favicon ul li{
     margin: 1px;
