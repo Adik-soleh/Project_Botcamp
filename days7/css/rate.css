@@ -8,6 +8,7 @@
     grid-gap: 5px;
     margin: 5px auto;
     padding: 20px;
+    background-color: rgb(255, 255, 255);
 
   }
    h1{
@@ -27,7 +28,7 @@
   .card img{
     width: 150px;
     max-height: 200px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
   }
   
@@ -42,3 +43,29 @@
   .container h4{
       text-align: end;
   }
+
+  @media (max-width: 642px)  { 
+    .container-cards{
+        max-width: max-content;
+        height: auto;
+        display: block;
+
+    }
+    .card{
+    max-width: fit-content;
+    height: auto;
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+}
+.favicon ul li{
+    margin: 1px;
+}
+.card{
+        box-shadow:0 10px 6px -6px #777;
+}
+.activity h1{
+ margin-top: 30px;
+}
+}
