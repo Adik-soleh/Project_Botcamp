@@ -1,4 +1,4 @@
-const promises = new Promise((Rlv,Rjc ) => {
+const promises = new Promise((rsv,Rjc ) => {
     const xhr = new XMLHttpRequest()
 
     xhr.open('GET','https://api.npoint.io/838e364241be4658998c',true)
@@ -6,7 +6,7 @@ const promises = new Promise((Rlv,Rjc ) => {
     xhr.onload = () =>{
     // Http req
     if(xhr.status === 200){
-        Rlv(JSON.parse(xhr.responseText))
+        rsv(JSON.parse(xhr.responseText))
     }else if(xhr.status === 400){
         Rjc("error Request :(")
     }
