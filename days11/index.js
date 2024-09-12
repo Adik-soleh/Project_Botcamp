@@ -55,7 +55,7 @@ app.post("/add-project", (req, res) => {
   };
   
   blog.unshift(data);
-  console.log("isi blog sekarang: ",blog);
+  console.log("berhasil ambil data: ",blog);
   
 })
 
@@ -63,6 +63,7 @@ app.post("/add-project", (req, res) => {
 function testi(req, res) {
   res.render('testimonial')
 }
+
 
 function detail(req, res) {
   res.render('details')

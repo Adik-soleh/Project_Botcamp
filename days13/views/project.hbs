@@ -45,7 +45,7 @@
       
     <div class="container container-cards" >
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-warning" class="justify-content-end" href="crate-blog">create blog</a>      
+      <a class="btn btn-warning" class="justify-content-end" href="add-project">create blog</a>      
 </div>
       <div class="row  align-self-center" 
       id="container-card">
@@ -53,9 +53,9 @@
       
         <div class="col">
         <div class="card" style="width: 100%;">
-        <a href="profile.html"><img src="${Add[i].files}" class="card-img-top" alt="..."></a>
+        <a href="profile.html">{{blog.image}}</a>
           <div class="card-body">
-            <h5 class="card-title">{{title}}</h5>
+            <a href=""><h5 class="card-title">{{title}}</h5></a> 
             <h6 class="card-subtitle">Durasi : {{sDate}}</h6>
             <p class="card-text">{{content}}</p>
             <div class="container text-center">
@@ -67,8 +67,8 @@
               </div>
             </div>
             <div class="d-flex justify-content-between update">
-              <a href="#" class="btn btn-dark" >Update</a>
-              <a href="#" class="btn btn-danger" >Delete</a>
+              <a href="/edit-project/{{@index}}" class="btn btn-dark" >Edit</a>
+              <a href="/delete-project/{{@index}}" class="btn btn-danger" >Delete</a>
             </div>
           </div>
         </div>

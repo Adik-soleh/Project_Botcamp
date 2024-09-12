@@ -3,6 +3,8 @@ const app = express()
 const port = 3000
 const path = require("path");
 const { title } = require('process');
+
+//set ve
 app.set('view engine', 'hbs');
 app.set("views", path.join(__dirname, "./views"))
 
@@ -24,8 +26,9 @@ app.get('/contac', contacMe);
 app.get('/add-project', createBlog)
 
  
-
+// ambil data user dan masuk ke array kosong
 const blog =[]
+
 
 function home(req, res) {
   res.render('index')
@@ -72,12 +75,26 @@ app.post("/add-project", (req, res) => {
 
 function edit(req, res) {
   const index = req.params.index;
-  const {title, content,} = req.body
+  const {
+    title, 
+    content, 
+    sDate,
+    eDate,
+    Cbx1,
+    Cbx2,
+    Cbx3,
+    Cbx4,
+  } = req.body
 
   blog[index] = {
     title : title,
     content : content,
-    
+    sDate : sDate,
+    eDate : eDate,
+    Cbx1 : Cbx1,
+    Cbx2 : Cbx2,
+    Cbx3 : Cbx3,
+    Cbx4 : Cbx4
     
 
 

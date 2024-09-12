@@ -11,75 +11,77 @@
     <!-- <link rel="stylesheet" href="assets/css/card.css"> -->
   </head>
   <body>
-    <!-- navbar bootstrap-->
-    <nav class="navbar navbar-expand-lg fixed-top">
-      <div class="container-fluid">
-        <img class="navbar-brand" src="https://dumbways.id/assets/images/brandred.png" width="50px">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-            <li class="nav-item">
-              <a class="nav-link text-black " aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link  text-black" href="/project">Add Project</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link  text-black" href="testimonial">Testimoni</a>
-            </li>
-          </ul>
-          <div class="d-flex align-center btn-contact">
-          <a href="contac" class="btn btn-dark text-white mx-2" type="button">Contact Us</a>
-          </div>
-        </div>
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="https://dumbways.id/assets/images/brandred.png" width="50px" alt="Brand Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-black" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black" href="/project">Add Project</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black" href="testimonial">Testimoni</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center">
+        <a href="contac" class="btn btn-dark text-white mx-2" type="button">Contact Us</a>
       </div>
-    </nav>
-  <!-- end navbar -->
+    </div>
+  </div>
+</nav>
+<!-- end navbar -->
     <!-- Form Project -->
-        <form style="margin: 5px auto; 
+      <form style="margin: 5px auto; 
                   background-color: rgb(255, 255, 255); 
                   margin-top: 7%;
                   border-radius: 8px;" 
-                  action="/edit-project/{{index}}" method="post" class="p-5" >
-        <h1 style="text-align: center;">EDIT PROJECT</h1>
+                  action="/add-project" method="post" class="p-5" >
+        <h1>ADD MY PROJECT</h1>
           <div class="mb-3" >
               <label for="title" class="form-label">Name Project</label>
-              <input type="text" class="form-control" name="title" value="{{blog.title}}" >
+              <input type="text" class="form-control" name="title"  >
           </div>
           <div class="row ">
             <div class="col-auto w-50">
               <label for="sDate" class="form-label">First Date</label>
-              <input type="datetime-local" class="form-control" name="sDate" value="{{blog.sDate}}" >
+              <input type="datetime-local" class="form-control" name="sDate" >
           </div>
           <div class="col-auto w-50">
               <label for="eDate" class="form-label">End Date</label>
-              <input type="datetime-local" class="form-control" name="eDate" value="{{blog.eDate}}">
+              <input type="datetime-local" class="form-control" name="eDate" >
           </div>
           </div>
           <div class="mb-3">
               <label for="content" class="form-label">Message</label>
-              <textarea class="form-control" name="content" rows="3" >{{blog.content}}</textarea>
+              <textarea class="form-control" name="content" rows="3" ></textarea>
           </div>
           <div class="row">
             <div class="mb-3 col-12">
               <div class="form-check form-check-inline">
-                <input class="form-check-input " type="checkbox" name="Cbx1" value="{{blog.Cbx1}}">
+                <input class="form-check-input " type="checkbox" name="Cbx1" value="Java">
                 <label class="form-check-label m-2" for="Cbx1">Java</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="Cbx2" value="{{Cbx2}}">
+                <input class="form-check-input" type="checkbox" name="Cbx2" value="node.js">
                 <label class="form-check-label m-2" for="Cbx2">Node.js</label>
               </div>
             </div>
             <div class="mb-3 col-auto">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="Cbx3" value="{{Cbx3}}">
+                <input class="form-check-input" type="checkbox" name="Cbx3" value="Python">
                 <label class="form-check-label m-2" for="Cbx3">Next.js</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="Cbx4" value="{{Cbx4}}">
+                <input class="form-check-input" type="checkbox" name="Cbx4" value="JavaScript">
                 <label class="form-check-label m-2" for="Cbx4">JavaScript</label>
               </div>
             </div>
@@ -89,7 +91,7 @@
             <input class="form-control" type="file" name="image">
           </div>
           <div class="mb3 text-end">
-            <button  class="btn btn-success" id="button">Edit</button>
+            <button type="submit" class="btn btn-success" id="button">Submit</button>
           </div>
       </form>
   

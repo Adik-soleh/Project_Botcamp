@@ -3,8 +3,16 @@ const app = express()
 const port = 3000
 const path = require("path");
 const { title } = require('process');
-const db = require('./db');
+const config = require("./config/config.json");
+const { Sequelize, QueryTypes } = require("sequelize");
+const blogs = require('./models/blogs');
+const sequelize = new Sequelize(config.development);
 
+
+
+
+
+//set ve
 app.set('view engine', 'hbs');
 app.set("views", path.join(__dirname, "./views"))
 
@@ -17,40 +25,41 @@ app.use(express.urlencoded({extended: true}));
 app.get('/', home);
 app.get('/project', project)
 app.get('/add-project', addProject)
+app.get('/delete-project/:index', deleteProject)
+app.get('/edit-project/:index', editProject)
+app.post('/edit-project/:index', edit)
 app.get('/testimonial', testi)
-app.get("/project/details/:id", detail);
+app.get('/project/details/:index', detail);
 app.get('/contac', contacMe);
-app.get('/crate-blog', createBlog)
+app.get('/add-project', createBlog)
 
-
-app.get('/io', async (req, res) => {
-  try {
-    const result = await db.query('SELECT * FROM public.dw');
-    res.json(result.rows);
-
-    console.log(result.rows);
-
-    
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-
-
+ 
+// ambil data user dan masuk ke array kosong
 const blog =[]
 
-async function home(req, res) {
-  res.render('index')
 
+function home(req, res) {
+  res.render('index')
+}
+async function project(req, res) {
+  const query = `SELECT * FROM public.blogs`;
+  const result = await sequelize.query(query, { type: QueryTypes.SELECT });
+
+  res.render("project", { blogs: result });
 
 }
+
+
 
 function project(req, res) {
-  res.render('project', {blog},)
+  res.render('project', {blog:blog},)
 }
 
+function deleteProject(req, res) {
+  const index = req.params.index;
+  blog.splice(index,1)
+  res.redirect("/project")
+}
 function addProject(req, res) {
   res.render('add-project')
 }
@@ -71,21 +80,62 @@ app.post("/add-project", (req, res) => {
     Cbx2,
     Cbx3,
     Cbx4,
-    image:"",
+    
+    
   };
   
   blog.unshift(data);
   console.log("isi blog sekarang: ",blog);
+  res.redirect('project')
   
 })
 
+
+function edit(req, res) {
+  const index = req.params.index;
+  const {
+    title, 
+    content, 
+    sDate,
+    eDate,
+    Cbx1,
+    Cbx2,
+    Cbx3,
+    Cbx4,
+    image
+  } = req.body
+
+  blog[index] = {
+    title : title,
+    content : content,
+    sDate : sDate,
+    eDate : eDate,
+    Cbx1 : Cbx1,
+    Cbx2 : Cbx2,
+    Cbx3 : Cbx3,
+    Cbx4 : Cbx4,
+    image: 'https://t3.ftcdn.net/jpg/03/86/83/28/360_F_386832865_KzXYSvOLzUhztbeVD5d6pi2MBMqwBGAL.jpg'
+   
+    
+
+
+  }
+
+  res.redirect('/project')
+}
+function editProject(req, res) {
+  const index = req.params.index;
+
+  res.render('edit-project', {blog : blog[index], index : index});
+}
 
 function testi(req, res) {
   res.render('testimonial')
 }
 
 function detail(req, res) {
-  res.render('details')
+  const {index} = req.params;
+  res.render('details', {blog : blog[index]});
 }
 
 function contacMe(req, res) {
