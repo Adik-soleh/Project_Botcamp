@@ -3,22 +3,38 @@ const app = express();
 const port = 3000;
 const path = require("path");
 const config = require("./config/config.json");
-const { Sequelize } = require("sequelize");
+const { Sequelize} = require("sequelize");
+const bcrypt = require ('bcrypt')
 const model = require("./models").blogs;
+const userModel = require("./models").user;
+const flash = require("express-flash")
+const session = require('express-session')
 
 // Set up Sequelize
 const sequelize = new Sequelize(config.development);
 
 // Set view engine dan folder views
-app.set("view engine", "hbs");
+app.set("view engine", "HBS");
 app.set("views", path.join(__dirname, "./views"));
 
 // Static files
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use(express.urlencoded({ extended: true }));
 
-// Routing
-app.get('/', home);
+
+//munculkan alert dengan flash saat user berhasil login
+app.use(flash());
+// atur masa berlaku login
+app.use(session({
+  name: "My_session",
+  secret: "A7Ve6dJ3y6",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge : 172800000
+  }
+}))
+app.get('/', home)
 app.get('/project', project);
 app.post('/project');
 app.post('/add-project', addProject);
@@ -30,17 +46,91 @@ app.get('/details/:id', detail);
 app.get('/contac', contacMe);
 app.get('/add-project', createBlog);
 
+app.get('/register', registerVw)
+app.get('/login', loginVw)
+
+app.post('/register', register)
+app.post('/login', login)
+
 // Array kosong untuk blog
 const blog = [];
 
 // Function Definitions
-function home(req, res) {
-  res.render('index');
+function registerVw(req, res) {
+  res.render('register')
+}
+
+async function register(req, res) {
+  try {
+  const{name, email, password} = req.body
+  //buat durasi pengacakan
+  const saltRounds = 10
+  
+  const hashPassword = await bcrypt.hash(password, saltRounds)
+  
+  await userModel.create({
+    name : name,
+    email : email,
+    password : hashPassword,
+  })
+  req.flash("valid", "Register berhasil")
+
+  res.redirect('/register');
+  }catch(error) {
+    req.flash("danger", "Register gagal")
+    res.redirect('/register')
+  }
+}
+function loginVw(req,res) {
+  res.render('login')
+}
+
+async function login(req,res) {
+try{
+    
+  const {email, password} = req.body;
+  //cek email ada atau tidak di data base
+  const user = await userModel.findOne({
+    where: {
+      email:email
+    }
+  })
+  if(!user) {
+    req.flash('danger', "Email / Password salah!");
+   return res.redirect('/login');
+  }
+
+  //cek password valid atau tidak dengan Db
+  const validPassword = await bcrypt.compare(password, user.password)
+
+  if(!validPassword) {
+    req.flash('danger', "Email / Password salah!");
+    return res.redirect('/login')
+  }
+  
+  //jika user berhasil login
+  req.session.user = user;
+  req.flash('valid', "Login berhasil")
+  
+  res.redirect('/')
+} catch(error) {
+  req.flash('danger',"masalah saat login!")
+  res.redirect('/')
+  }
+}
+
+function home(req, res) {  
+  const user = req.session.user;
+
+
+  res.render('index', {user});
 }
 
 async function project(req, res) {
   const result = await model.findAll();
-  res.render("project", { blog: result });
+  const user = req.session.user;
+  
+  res.render("project", { blog: result, user});
 }
 
 async function deleteProject(req, res) {
@@ -50,7 +140,7 @@ async function deleteProject(req, res) {
     where: { id },
   });
 
-  if (!result) return res.render("not-found");
+  if (!result) return res.render("error");
 
   await model.destroy({
     where: { id },
@@ -89,7 +179,7 @@ async function edit(req, res) {
     where: { id },
   });
 
-  if (!blog) return res.render("not-found :(");
+  if (!blog) return res.render("error");
 
   blog.title = title;
   blog.content = content;
@@ -105,7 +195,7 @@ async function editProject(req, res) {
     where: { id },
   });
 
-  if (!result) return res.render("halaman tidak di temukan");
+  if (!result) return res.render("error");
 
   res.render("edit-project", { blog: result });
 }
@@ -117,7 +207,7 @@ async function detail(req, res) {
     where: { id },
   });
 
-  if (!result) return res.render("halaman tidak di temukan :(");
+  if (!result) return res.render("error");
   res.render("details", { blog: result });
 }
 
@@ -131,5 +221,5 @@ function contacMe(req, res) {
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server berjalan di port ${port} 😁😁`);
+  console.log(`Server ready in port ${port}`);
 });
