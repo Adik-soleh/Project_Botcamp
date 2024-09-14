@@ -65,6 +65,7 @@ function registerVw(req, res) {
 async function register(req, res) {
   try {
     const { name, email, password } = req.body;
+    // Authentication:
     const saltRounds = 10;
     const hashPassword = await bcrypt.hash(password, saltRounds);
 
@@ -125,6 +126,7 @@ async function project(req, res) {
   res.render("project", { blog: result, user });
 }
 
+// CRUD
 async function deleteProject(req, res) {
   const { id } = req.params;
 
