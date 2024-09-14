@@ -1,7 +1,7 @@
 {
-  "name": "days11",
+  "name": "days15",
   "version": "1.0.0",
-  "description": "days-11",
+  "description": "days-15",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
@@ -16,6 +16,7 @@
     "hbs": "^4.2.0",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
+    "railway": "^2.0.17",
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
