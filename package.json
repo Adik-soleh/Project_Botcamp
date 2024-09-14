@@ -1,8 +1,8 @@
 {
-  "name": "server",
+  "name": "days15",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "days-15",
+  "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
   },

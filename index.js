@@ -214,6 +214,8 @@ function contacMe(req, res) {
   res.render('contac');
 }
 
+module.exports = app;
+
 // Start server
 app.listen(port, () => {
   console.log(`Server ready in port ${port}`);
