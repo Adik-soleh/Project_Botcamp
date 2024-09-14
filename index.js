@@ -9,7 +9,6 @@ const model = require("./models").blogs;
 const userModel = require("./models").user;
 const flash = require("express-flash");
 const session = require('express-session');
-const railway = require ('railway')
 
 // Set up Sequelize
 const sequelize = new Sequelize(config.development);
@@ -213,8 +212,6 @@ function testi(req, res) {
 function contacMe(req, res) {
   res.render('contac');
 }
-
-module.exports = app;
 
 // Start server
 app.listen(port, () => {
